@@ -21,7 +21,7 @@
 							<builder buildPath="${workspace_loc:/debug_cli_test}/Debug" id="cdt.managedbuild.builder.gnu.cross.138439712" keepEnvironmentInBuildfile="false" name="Gnu Make Builder" superClass="cdt.managedbuild.builder.gnu.cross"/>
 							<tool id="cdt.managedbuild.tool.gnu.assembler.mingw.exe.debug.1494484108" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.mingw.exe.debug">
 								<option id="gnu.both.asm.option.include.paths.1426418293" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/debug_cli_test/gtest_src/gtest}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/debug_cli_test/plat/debug_cli}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/debug_cli_test/gtest_src}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.816140186" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
@@ -40,7 +40,7 @@
 								<option defaultValue="gnu.c.optimization.level.none" id="gnu.c.compiler.mingw.exe.debug.option.optimization.level.1149219050" name="Optimization Level" superClass="gnu.c.compiler.mingw.exe.debug.option.optimization.level" useByScannerDiscovery="false" valueType="enumerated"/>
 								<option id="gnu.c.compiler.mingw.exe.debug.option.debugging.level.1861198613" name="Debug Level" superClass="gnu.c.compiler.mingw.exe.debug.option.debugging.level" useByScannerDiscovery="false" value="gnu.c.debugging.level.max" valueType="enumerated"/>
 								<option id="gnu.c.compiler.option.include.paths.1247386900" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/debug_cli_test/gtest_src/gtest}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/debug_cli_test/plat/debug_cli}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/debug_cli_test/gtest_src}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.477273845" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
@@ -153,4 +153,5 @@
 		</configuration>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
+	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
 </cproject>

@@ -4,8 +4,13 @@
 set SCRIPT_DIR=%~dp0%
 set ProjectHome=%SCRIPT_DIR:~0,-1%
 set WorkspaceDir=%ProjectHome%\workspace
-::set ThisProjTools=%ProjectHome%\tools
-set ThisProjTools=C:\tools
 
+::-----------------------------------------------------------------------------
+:: Load Script Environment / Configuration
+::-----------------------------------------------------------------------------
+for /f "delims=" %%x in (%ProjectHome%\env.config) do (set "%%x")
+
+::-----------------------------------------------------------------------------
 :: Run the workbench
-start %ThisProjTools%\eclipse-luna\eclipse.exe -data %WorkspaceDir%
+::-----------------------------------------------------------------------------
+start %EclipseExe% -data %WorkspaceDir%

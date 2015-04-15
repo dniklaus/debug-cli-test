@@ -33,7 +33,7 @@
 		<link>
 			<name>plat/debug_cli</name>
 			<type>2</type>
-			<location>C:/git/test-workspaces/debug-cli-test/lib/plat/debug-cli/debug_cli</location>
+			<location>C:/git/test-projects/debug-cli-test/lib/plat/debug-cli/debug_cli</location>
 		</link>
 	</linkedResources>
 </projectDescription>
