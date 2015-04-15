@@ -12,6 +12,6 @@
 
 TEST(dbgCli, RootNode)
 {
-  DbgCli_Node::AssignRootNode(new DbgCli_Topic("", "dbg", "Test Debug CLI Root Node."));
+  DbgCli_Node::AssignRootNode(new DbgCli_Topic(0, "dbg", "Test Debug CLI Root Node."));
   EXPECT_NE((void*)0, DbgCli_Node::RootNode());
 }
