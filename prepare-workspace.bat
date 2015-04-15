@@ -58,6 +58,18 @@ if "%OsVariant%"=="win32" (
 )
 
 ::-----------------------------------------------------------------------------
+:: Assert untouched .project file
+::-----------------------------------------------------------------------------
+:: ensure that src/.project has not been changed
+set statusResult=
+for /f "delims=" %%a in ('%%Git%% status --porcelain %%ProjectHome%%\src\.project') do @set statusResult=%%a
+echo "%statusResult%"
+if not "%statusResult%"=="" (
+  msg "%username%" The file %ProjectHome%\src\.project is already touched. This script shall only be run on a vanilla project just cloned before.
+  goto end
+)
+
+::-----------------------------------------------------------------------------
 :: unpack Eclipse metadata in workspace
 ::-----------------------------------------------------------------------------
 if not exist "%WorkspaceDir%\.metadata" (
