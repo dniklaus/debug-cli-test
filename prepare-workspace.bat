@@ -1,11 +1,12 @@
-@echo off
+::@echo off
 ::-----------------------------------------------------------------------------
 :: Paths
 ::-----------------------------------------------------------------------------
 set SCRIPT_DIR=%~dp0%
 set ProjectHome=%SCRIPT_DIR:~0,-1%
 set WorkspaceDir=%ProjectHome%\workspace
-set ThisProjTools=C:\tools
+set TestTools=%ProjectHome%\..\Tools
+set ThisProjTools=%ProjectHome%\tools
 
 ::-----------------------------------------------------------------------------
 :: Load Script Environment / Configuration
@@ -25,8 +26,10 @@ set ExpectedProjectHome=%TestProjects%\%ProjectSubDir%
 ::-----------------------------------------------------------------------------
 IF "%PROCESSOR_ARCHITECTURE%;%PROCESSOR_ARCHITEW6432%"=="x86;" (
   set OsVariant=win32
+  set OsVariant2=win32
 ) ELSE (
   set OsVariant=win64
+  set OsVariant2=win32-x86_64
 )
 
 ::-----------------------------------------------------------------------------
@@ -40,10 +43,13 @@ if not "%ExpectedProjectHome%"=="%ProjectHome%" (
   goto end
 )
 
-
 ::-----------------------------------------------------------------------------
 :: Set the tools' paths
 ::-----------------------------------------------------------------------------
+:: Eclipse Workbench
+set EclipseRevs=%TestTools%\eclipse_revs
+set CurEclipse=%EclipseRevs%\%EclipseVer%-%OsVariant2%
+
 :: 7Zip
 set Archiver=%ThisProjTools%\7za920\7za.exe
 
@@ -68,6 +74,27 @@ if not "%statusResult%"=="" (
   msg "%username%" The file %ProjectHome%\src\.project is already touched. This script shall only be run on a vanilla project just cloned before.
   goto end
 )
+
+::-----------------------------------------------------------------------------
+:: Eclipse Workbench
+::-----------------------------------------------------------------------------
+if not exist "%CurEclipse%" (
+  if not exist "%EclipseRevs%" (
+    md "%EclipseRevs%"
+  )
+  md "%CurEclipse%"
+  
+  if not exist "%EclipseRevs%\%EclipseVer%-%OsVariant2%.zip" (
+    %Wget% --tries=0 --output-document="%EclipseRevs%\%EclipseVer%-%OsVariant2%.zip" "%EclipseDownloadUrl%/%EclipseVer%-%OsVariant2%.zip"
+  )
+  %Archiver% x -y -o%CurEclipse% %EclipseRevs%\%EclipseVer%-%OsVariant2%.zip
+  if %errorlevel% == 0 (
+    del %EclipseRevs%\%EclipseVer%-%OsVariant2%.zip
+  )
+)
+:: create softlink (junction) for Eclipse Workbench in current project tools
+rmdir %ThisProjTools%\eclipse
+mklink /J %ThisProjTools%\eclipse %CurEclipse%\eclipse
 
 ::-----------------------------------------------------------------------------
 :: unpack Eclipse metadata in workspace

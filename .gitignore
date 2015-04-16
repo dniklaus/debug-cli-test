@@ -28,3 +28,4 @@
 *.app
 /workspace/RemoteSystemsTempFiles
 .metadata
+/tools/eclipse
