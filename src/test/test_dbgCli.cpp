@@ -33,7 +33,7 @@ TEST(dbgCli, RootNode)
 TEST(dbgCli, AddTopic)
 {
 // MUST NOT be done again!! //  DbgCli_Node::AssignRootNode(new DbgCli_Topic(0, "mmi", "Test Debug CLI Root Node."));
-  DbgCli_Node* screenNode = new DbgCli_Topic("mmi", "screen", "Screen Node.");
+  DbgCli_Topic* screenNode = new DbgCli_Topic(DbgCli_Node::RootNode(), "screen", "Screen Node.");
   EXPECT_EQ(screenNode, DbgCli_Node::RootNode()->getNode("mmi", "screen"));
   EXPECT_EQ("screen", DbgCli_Node::RootNode()->getNode("mmi", "screen")->getNodeName());
   EXPECT_EQ("Screen Node.", DbgCli_Node::RootNode()->getNode("mmi", "screen")->getHelpText());
@@ -41,7 +41,7 @@ TEST(dbgCli, AddTopic)
 
 TEST(dbgCli, AddCommand)
 {
-  DbgCli_Node* showCmd = new DbgCli_Command("mmi screen", "show", "Show Node, shows current screen.");
+  DbgCli_Command* showCmd = new DbgCli_Command(DbgCli_Node::RootNode()->getNode("mmi", "screen"), "show", "Show Node, shows current screen.");
   EXPECT_EQ(showCmd, DbgCli_Node::RootNode()->getNode("mmi screen", "show"));
   EXPECT_EQ("show", DbgCli_Node::RootNode()->getNode("mmi screen", "show")->getNodeName());
   EXPECT_EQ("Show Node, shows current screen.", DbgCli_Node::RootNode()->getNode("mmi screen", "show")->getHelpText());
@@ -49,22 +49,22 @@ TEST(dbgCli, AddCommand)
 
 TEST(dbgCli, AddOtherBranch)
 {
-  DbgCli_Node* sensorA = new DbgCli_Topic("mmi", "sensorA", "This is Sensor A.");
+  DbgCli_Topic* sensorA = new DbgCli_Topic(DbgCli_Node::RootNode(), "sensorA", "This is Sensor A.");
   EXPECT_EQ(sensorA, DbgCli_Node::RootNode()->getNode("mmi", "sensorA"));
   EXPECT_EQ("sensorA", DbgCli_Node::RootNode()->getNode("mmi", "sensorA")->getNodeName());
   EXPECT_EQ("This is Sensor A.", DbgCli_Node::RootNode()->getNode("mmi", "sensorA")->getHelpText());
 
-  DbgCli_Node* subX = new DbgCli_Topic("mmi sensorA", "subX", "This is a subsystem x of sensor A.");
+  DbgCli_Topic* subX = new DbgCli_Topic(sensorA, "subX", "This is a subsystem x of sensor A.");
   EXPECT_EQ(subX, DbgCli_Node::RootNode()->getNode("mmi sensorA", "subX"));
   EXPECT_EQ("subX", DbgCli_Node::RootNode()->getNode("mmi sensorA", "subX")->getNodeName());
   EXPECT_EQ("This is a subsystem x of sensor A.", DbgCli_Node::RootNode()->getNode("mmi sensorA", "subX")->getHelpText());
 
-  DbgCli_Node* topicY = new DbgCli_Topic("mmi sensorA subX", "topicY", "TopicY in subsystemX of sensor A");
+  DbgCli_Topic* topicY = new DbgCli_Topic(subX, "topicY", "TopicY in subsystemX of sensor A");
   EXPECT_EQ(topicY, DbgCli_Node::RootNode()->getNode("mmi sensorA subX", "topicY"));
   EXPECT_EQ("topicY", DbgCli_Node::RootNode()->getNode("mmi sensorA subX", "topicY")->getNodeName());
   EXPECT_EQ("TopicY in subsystemX of sensor A", DbgCli_Node::RootNode()->getNode("mmi sensorA subX", "topicY")->getHelpText());
 
-  DbgCli_Node* commandZ = new DbgCli_Command("mmi sensorA subX", "commandZ", "CommandZ in subsystemX of sensor A");
+  DbgCli_Command* commandZ = new DbgCli_Command(subX, "commandZ", "CommandZ in subsystemX of sensor A");
   EXPECT_EQ(commandZ, DbgCli_Node::RootNode()->getNode("mmi sensorA subX", "commandZ"));
   EXPECT_EQ("commandZ", DbgCli_Node::RootNode()->getNode("mmi sensorA subX", "commandZ")->getNodeName());
   EXPECT_EQ("CommandZ in subsystemX of sensor A", DbgCli_Node::RootNode()->getNode("mmi sensorA subX", "commandZ")->getHelpText());
@@ -72,7 +72,7 @@ TEST(dbgCli, AddOtherBranch)
 
 TEST(dbgCli, AddTopicSiblingToCommand)
 {
-  new DbgCli_Topic("mmi screen", "screensub", "Subsystem to Screen");
+  new DbgCli_Topic(DbgCli_Node::RootNode()->getChildNode("screen"), "screensub", "Subsystem to Screen");
   EXPECT_EQ("screensub", DbgCli_Node::RootNode()->getNode("mmi screen", "screensub")->getNodeName());
   EXPECT_EQ("Subsystem to Screen", DbgCli_Node::RootNode()->getNode("mmi screen", "screensub")->getHelpText());
 }
