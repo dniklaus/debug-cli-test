@@ -35,5 +35,10 @@
 			<type>2</type>
 			<location>C:/git/test-projects/debug-cli-test/lib/plat/debug-cli/debug_cli</location>
 		</link>
+		<link>
+			<name>plat/debug_trace</name>
+			<type>2</type>
+			<location>C:/git/test-projects/debug-cli-test/lib/plat/debug-trace/debug_trace</location>
+		</link>
 	</linkedResources>
 </projectDescription>

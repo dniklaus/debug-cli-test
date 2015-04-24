@@ -2,3 +2,7 @@
 	path = lib/plat/debug-cli
 	url = git@github.com:ERNICommunity/debug-cli.git
 	branch = master
+[submodule "lib/plat/debug-trace"]
+	path = lib/plat/debug-trace
+	url = git@github.com:ERNICommunity/dbg-trace.git
+	branch = master
