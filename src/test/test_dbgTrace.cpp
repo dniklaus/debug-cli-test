@@ -42,7 +42,7 @@ TEST(dbgTrace, TracePort)
   const char* portTag = "TestPort";
   DbgTrace_Out* consoleOut = DbgTrace_Context::getContext()->getTraceOut("console");
   EXPECT_NE((void*)0, consoleOut);
-  DbgTrace_Port* port = new DbgTrace_Port(DbgTrace_Context::getContext(), portTag, consoleOut, DbgTrace_Level::notice);
+  DbgTrace_Port* port = new DbgTrace_Port(portTag, consoleOut->getName(), DbgTrace_Level::notice);
   EXPECT_NE((void*)0, port);
   EXPECT_EQ("TestPort", port->getTag());
   EXPECT_EQ(DbgTrace_Level::notice, port->getLevel());
